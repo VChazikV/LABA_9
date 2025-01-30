@@ -98,7 +98,6 @@ namespace LABA_9
 
             }
         }
-
         /// <summary>
         /// Свойство для обработки бизнес-правил для кол-ва реакций на посте
         /// </summary>
@@ -119,6 +118,9 @@ namespace LABA_9
                 }
             }
         }
+        /// <summary>
+        /// Конструктор всех атрибутов
+        /// </summary>
         public Post(string name, int numViews, int numComments, int numReactions)
         {
             Name = name;
@@ -127,6 +129,9 @@ namespace LABA_9
             Reactions = numReactions;
             countOfPosts++;
         }
+        /// <summary>
+        /// Конструктор без имени
+        /// </summary>
         public Post(int numViews, int numComments, int numReactions)
         {
             Name = "";
@@ -135,6 +140,9 @@ namespace LABA_9
             Reactions = numReactions;
             countOfPosts++;
         }
+        /// <summary>
+        /// Конструктор без атрибутов
+        /// </summary>
         public Post()
         {
             Name = "";
@@ -143,7 +151,9 @@ namespace LABA_9
             Reactions = 0;
             countOfPosts++;
         }
-
+        /// <summary>
+        /// Конструктор копирования
+        /// </summary>
         public Post(Post p)
         {
             Name = "";
@@ -152,7 +162,9 @@ namespace LABA_9
             Reactions= p.Reactions;
             countOfPosts++;
         }
-
+        /// <summary>
+        /// Метод преобразования формы слова
+        /// </summary>
         private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)
         {
             string corectForm;
@@ -191,15 +203,18 @@ namespace LABA_9
                 $"------------------------------------\n");
         }
         /// <summary>
-        /// Вывод информации о кол-ве объектов."
+        /// Вывод информации о кол-ве объектов.
         /// </summary>
         public static void ShowCountOfPosts()
         {
             Console.WriteLine($"Кол-во постов {countOfPosts}\n");
         }
+        /// <summary>
+        /// Вывод информации о информации объекта.
+        /// </summary>
         public void ShowCoefficientOfEngagement()
         {
-            double countOfEngagement = (float)numViews / SUBSCRIBERS;
+            double countOfEngagement = (float) numViews / SUBSCRIBERS;
             countOfEngagement = Math.Round(countOfEngagement, 2);
             if (countOfEngagement > 1)
             {
@@ -216,6 +231,27 @@ namespace LABA_9
             else
             {
                 Console.WriteLine($"Коэффициент вовлечённости поста {name}  равен {countOfEngagement}\n");
+            }
+        }
+        public static void ShowCoefficientOfEngagement(Post postCurrent)
+        {
+            double countOfEngagement = (float)postCurrent.Views / SUBSCRIBERS;
+            countOfEngagement = Math.Round(countOfEngagement, 2);
+            if (countOfEngagement > 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
+                Console.ResetColor();
+            }
+            else if (countOfEngagement < 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name}  равен {countOfEngagement}\n");
             }
         }
     }
