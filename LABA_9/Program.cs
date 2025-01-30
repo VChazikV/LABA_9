@@ -14,17 +14,15 @@
             //Post_4.Show();
             //Post Post_5 = new Post(451, 7652, 67893);
             //Post_5.Show();
-            Post.ShowCountOfPosts();
-            Post Post_1 = new Post(3, 2, 3);
-            Post_1.ShowInfoOfPosts();
-            Post.ShowCountOfPosts();
-            Post Post_2 = new Post();
-            Post_2.ShowInfoOfPosts();
-            Post.ShowCountOfPosts();
-            Post Post_3 = new Post(Post_1);
-            Post_3.ShowInfoOfPosts();
-            Post.ShowCountOfPosts();
-            
+
+            Post Post_1 = new Post(1323, 2, 3);
+            Post Post_2 = new Post("Pfkegf", 1000, 2, 3);
+            Post Post_3 = new Post(Post_2);
+            Post Post_4 = new Post(567, 234, 900);
+            Post_1.ShowCoefficientOfEngagement();
+            Post_2.ShowCoefficientOfEngagement();
+            Post_3.ShowCoefficientOfEngagement();
+            Post_4.ShowCoefficientOfEngagement();
         }
     }
 }

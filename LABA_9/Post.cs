@@ -9,6 +9,11 @@ namespace LABA_9
     internal class Post
     {
         /// <summary>
+        /// Название Поста
+        /// </summary>
+        string name;//Кол-во просмотров
+
+        /// <summary>
         /// Просмотры
         /// </summary>
         int numViews;//Кол-во просмотров
@@ -23,9 +28,33 @@ namespace LABA_9
         /// </summary>
         int numReactions;//Кол-во реакций
 
+        static int SUBSCRIBERS = 1000;//Константа для кол-во подписчиков
+
         static int countOfPosts = 0;//Кол-во постов
 
+        static int countOfUnnamedPosts = 0;//Кол-во постов без названия
 
+        /// <summary>
+        /// Свойство для обработки бизнес-правил для кол-ва просмотров на посте
+        /// </summary>
+        public string Name
+        {
+            get => name;
+
+            private set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
+                    name = $"POST_{++countOfUnnamedPosts}";
+                    Console.WriteLine($"Установлено имя {name}");
+                }
+                else
+                {
+                    name = value;
+                }
+
+            }
+        }
         /// <summary>
         /// Свойство для обработки бизнес-правил для кол-ва просмотров на посте
         /// </summary>
@@ -90,9 +119,17 @@ namespace LABA_9
                 }
             }
         }
-
+        public Post(string name, int numViews, int numComments, int numReactions)
+        {
+            Name = name;
+            Views = numViews;
+            Comments = numComments;
+            Reactions = numReactions;
+            countOfPosts++;
+        }
         public Post(int numViews, int numComments, int numReactions)
         {
+            Name = "";
             Views = numViews;
             Comments = numComments;
             Reactions = numReactions;
@@ -100,6 +137,7 @@ namespace LABA_9
         }
         public Post()
         {
+            Name = "";
             Views = 0;
             Comments = 0;
             Reactions = 0;
@@ -108,6 +146,7 @@ namespace LABA_9
 
         public Post(Post p)
         {
+            Name = "";
             Views = p.Views;
             Comments = p.Comments;
             Reactions= p.Reactions;
@@ -143,9 +182,13 @@ namespace LABA_9
         /// </summary>
         public void ShowInfoOfPosts()
         {
-            Console.WriteLine($"{numViews} {GetWordForm(numViews, "просмотр", "просмотра", "просмотров")}.\n" +
+            Console.WriteLine(
+                $"------------------------------------\n"+
+                $"{name}\n" +
+                $"{numViews} {GetWordForm(numViews, "просмотр", "просмотра", "просмотров")}.\n" +
                 $"{numComments} {GetWordForm(numComments, "комментарий", "комментария", "комментариев")}.\n" +
-                $"{numReactions} {GetWordForm(numReactions, "реакция", "реакции", "реакций")}.\n");
+                $"{numReactions} {GetWordForm(numReactions, "реакция", "реакции", "реакций")}.\n" +
+                $"------------------------------------\n");
         }
         /// <summary>
         /// Вывод информации о кол-ве объектов."
@@ -153,6 +196,27 @@ namespace LABA_9
         public static void ShowCountOfPosts()
         {
             Console.WriteLine($"Кол-во постов {countOfPosts}\n");
+        }
+        public void ShowCoefficientOfEngagement()
+        {
+            double countOfEngagement = (float)numViews / SUBSCRIBERS;
+            countOfEngagement = Math.Round(countOfEngagement, 2);
+            if (countOfEngagement > 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Коэффициент вовлечённости поста {name} равен {countOfEngagement}\n");
+                Console.ResetColor();
+            }
+            else if (countOfEngagement < 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Коэффициент вовлечённости поста {name} равен {countOfEngagement}\n");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine($"Коэффициент вовлечённости поста {name}  равен {countOfEngagement}\n");
+            }
         }
     }
 }
