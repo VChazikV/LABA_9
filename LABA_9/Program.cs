@@ -4,25 +4,39 @@
     {
         static void Main(string[] args)
         {
-            //Post Post_1 = new Post(1, 2, 3);
-            //Post_1.Show();
-            //Post Post_2 = new Post(12, 1232, 33456);
-            //Post_2.Show();
-            //Post Post_3 = new Post(14, 267, 39876);
-            //Post_3.Show();
-            //Post Post_4 = new Post(671, 345, 37651);
-            //Post_4.Show();
-            //Post Post_5 = new Post(451, 7652, 67893);
-            //Post_5.Show();
+            //#region Проверка кол-ва постов статический метод(переменная)
+            //Post.ShowCountOfPosts();
+            //Post Post_1 = new Post();
+            //Post.ShowCountOfPosts();
+            //Post Post_2 = new Post();
+            //Post.ShowCountOfPosts();
+            //Post Post_3 = new Post();
+            //Post.ShowCountOfPosts();
+            //#endregion
+            //#region Проверка перегрузок
+            //Post Post_4 = new Post("Защита лаба 4 часть 1",1234, 24, 67); // Перегрузка №1
+            //Post_4.ShowInfoOfPosts();
+            //Post Post_5 = new Post(543, 24, 67); // Перегрузка №2
+            //Post_5.ShowInfoOfPosts();
+            //Post Post_6 = new Post(); // Перегрузка №3
+            //Post_6.ShowInfoOfPosts();
+            //Post Post_7 = new Post(Post_4); // Перегрузка №3
+            //Post_7.ShowInfoOfPosts();
+            //#endregion
+            //#region Проверка доступа
+            //Post Post_Dostup = new Post();
+            //Post_Dostup.ShowInfoOfPosts();
+            //Post_Dostup.Views = 9112;
+            //Post_Dostup.Name = "Ntcnbr";
+            //Post_Dostup.Comments = 87;
+            //Post_Dostup.Reactions = 62;
+            //#endregion
+            //#region Проверка падежей
+            //Post Post_Padegh_1 = new Post(1, 1, 1);
+            //Post Post_Padegh_2 = new Post(2, 2, 2);
+            //Post Post_Padegh_9 = new Post(9, 9, 9);
+            //#endregion
 
-            Post Post_1 = new Post(1323, 2, 3);
-            Post Post_2 = new Post("Pfkegf", 1000, 2, 3);
-            Post Post_3 = new Post(Post_2);
-            Post Post_4 = new Post(567, 234, 900);
-            Post_1.ShowCoefficientOfEngagement();
-            Post_2.ShowCoefficientOfEngagement();
-            Post_3.ShowCoefficientOfEngagement();
-            Post_4.ShowCoefficientOfEngagement();
         }
     }
 }
