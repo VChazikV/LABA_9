@@ -13,7 +13,7 @@ namespace Controller
             }
             catch (Exception ex)
             {
-                Class1.ShowEror(ex.Message);
+                ViewUI.ShowEror(ex.Message);
             }
         }
         public static void CreateNewPost()
@@ -23,8 +23,13 @@ namespace Controller
         }
         public static string ShowInfoOfPost()
         {
-            //Сделать проверку орфографии
-            return "ejj0";
+            return "erty";
+            //return $"------------------------------------\n" +
+            //        $"{}\n" +
+            //        $"{numViews} {GetWordForm(numViews, "просмотр", "просмотра", "просмотров")}.\n" +
+            //        $"{numComments} {GetWordForm(numComments, "комментарий", "комментария", "комментариев")}.\n" +
+            //        $"{numReactions} {GetWordForm(numReactions, "реакция", "реакции", "реакций")}.\n" +
+            //        $"------------------------------------\n"";
 
         }
         /// <summary>

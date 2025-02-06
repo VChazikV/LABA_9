@@ -1,53 +1,56 @@
 ﻿using View;
 using Controller;
+using Model;
 namespace Start
 {
     internal class Program
     {
-        public static void PrintMenu()
-        {
-            Console.WriteLine("-------Параметры меню-------");
-            Console.WriteLine("1 - Добавить новый пост полностью");
-            Console.WriteLine("2 - Добавить новый пост пустой");
-            Console.WriteLine("3 - Добавить новый пост скопировав");
-        }
         static void Main(string[] args)
         {
-            PrintMenu();
-            string nextAction = null;
-            bool continueRaning = true;
-            do
-            {
-                nextAction = Console.ReadLine();
-                switch (nextAction)
-                {
-                    case "1":
-                        Console.WriteLine("Введите имя поста:");
-                        string name = Console.ReadLine();
-                        Console.WriteLine("Введите количество просмотров:");
-                        int views = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Введите количество комментариев:");
-                        int comments = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Введите количество реакций:");
-                        int reactions = int.Parse(Console.ReadLine());
+            Post post1 = new Post();
+            Post post2 = new Post();
+            Console.WriteLine(post1==post2);
+            Post post3 = new Post("1221", 12,34,55);
+            Post post4 = new Post(post3);
+            Console.WriteLine(post1 == post2);
+            Console.WriteLine(post3 == post2);
+            Console.WriteLine(post1 == post4);
+            //ViewUI.PrintMenu();
+            //string nextAction = null;
+            //bool continueRaning = true;
+            //do
+            //{
+            //    nextAction = Console.ReadLine();
+            //    switch (nextAction)
+            //    {
+            //        case "1":
+            //            Console.WriteLine("Введите имя поста:");
+            //            string name = Console.ReadLine();
+            //            Console.WriteLine("Введите количество просмотров:");
+            //            int views = int.Parse(Console.ReadLine());
+            //            Console.WriteLine("Введите количество комментариев:");
+            //            int comments = int.Parse(Console.ReadLine());
+            //            Console.WriteLine("Введите количество реакций:");
+            //            int reactions = int.Parse(Console.ReadLine());
 
-                        Cheking.CreateNewPost(name, views, comments, reactions);
-                        Console.WriteLine(Cheking.ShowInfoOfPost());
-                        break;
-                    case "2":
-                        Cheking.CreateNewPost();
-                        break;
-                    case "3":
-                        break;
-                    case "0":
-                        continueRaning = false;
-                        Console.WriteLine("Работа программы завершена");
-                        break;
-                    default:
-                        PrintMenu();
-                        break;
-                }
-            } while (continueRaning);
+            //            Cheking.CreateNewPost(name, views, comments, reactions);
+            //            Console.WriteLine(Cheking.ShowInfoOfPost());
+            //            break;
+            //        case "2":
+            //            Cheking.CreateNewPost();
+            //            break;
+            //        case "3":
+            //            Console.WriteLine(Cheking.ShowInfoOfPost());
+            //            break;
+            //        case "0":
+            //            continueRaning = false;
+            //            Console.WriteLine("Работа программы завершена");
+            //            break;
+            //        default:
+            //            ViewUI.PrintMenu();
+            //            break;
+            //    }
+            //} while (continueRaning);
 
             #region Проверка кол-ва постов статический метод(переменная)
             //Post.ShowCountOfPosts();
