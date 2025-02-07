@@ -1,60 +1,55 @@
 ﻿using View;
 using Controller;
-using PostArrayCollection;
 using Model;
+using Microsoft.VisualBasic;
+using System;
 namespace Start
 {
     internal class Program
     {
+
         static void Main(string[] args)
         {
-            PostArray arr = new PostArray(0);
-            for (int i = 0; i < arr.Length; i++)
+            
+            string nextAction;
+            bool continueRaning = true;
+            do
             {
-                Post.ShowInfoOfPostsNumber(arr[i]);
-            }
-            PostArray arr_1 = new PostArray(arr);
-            for (int i = 0; i < arr_1.Length; i++)
-            {
-                Post.ShowInfoOfPostsNumber(arr[i]);
-            }
-            Console.WriteLine(arr_1[2].Equals(arr[2]));
-            //ViewUI.PrintMenu();
-            //string nextAction = null;
-            //bool continueRaning = true;
-            //do
-            //{
-            //    nextAction = Console.ReadLine();
-            //    switch (nextAction)
-            //    {
-            //        case "1":
-            //            Console.WriteLine("Введите имя поста:");
-            //            string name = Console.ReadLine();
-            //            Console.WriteLine("Введите количество просмотров:");
-            //            int views = int.Parse(Console.ReadLine());
-            //            Console.WriteLine("Введите количество комментариев:");
-            //            int comments = int.Parse(Console.ReadLine());
-            //            Console.WriteLine("Введите количество реакций:");
-            //            int reactions = int.Parse(Console.ReadLine());
-
-            //            Cheking.CreateNewPost(name, views, comments, reactions);
-            //            Console.WriteLine(Cheking.ShowInfoOfPost());
-            //            break;
-            //        case "2":
-            //            Cheking.CreateNewPost();
-            //            break;
-            //        case "3":
-            //            Console.WriteLine(Cheking.ShowInfoOfPost());
-            //            break;
-            //        case "0":
-            //            continueRaning = false;
-            //            Console.WriteLine("Работа программы завершена");
-            //            break;
-            //        default:
-            //            ViewUI.PrintMenu();
-            //            break;
-            //    }
-            //} while (continueRaning);
+                ViewUI.PrintMenu();
+                nextAction = Console.ReadLine();
+                switch (nextAction)
+                {
+                    case "1":
+                        //Если успею, добавить заготовку под второй уровень меню и сделать прогу для взаимодействия
+                        PostArray posts_1 = new PostArray(3, "");
+                        //Cheking.CreateNewCollection(8);
+                        ViewUI.ShowMessage("Введите имя поста:");
+                        string name = Console.ReadLine();
+                        int views = Cheking.CheckIntBigger0("Введите количество просмотров:");
+                        int comments = Cheking.CheckIntBigger0("Введите количество комментариев:");
+                        int reactions = Cheking.CheckIntBigger0("Введите количество реакций:");
+                        posts_1[0] = Cheking.CreateNewPost(name, views, comments, reactions);//конструктор с параметрами
+                        posts_1[1] = Cheking.CreateNewPost();//Конструктор без параметров
+                        posts_1[2] = Cheking.CreateNewPost(posts_1[0]);//Конструктор с копированием
+                        Cheking.ShowCoefficientOfEngagement(posts_1[0]);//Коэффициент через static
+                        Cheking.ShowCoefficientOfEngagement(posts_1[0], "");//Коэффициент ,tp static
+                        Cheking.ShowCollection(posts_1);//Вывод
+                        Cheking.ShowCountOfPosts();
+                        Cheking.ShowCountOfCollections();
+                        break;
+                    case "2":
+                        NextAction2PartMenu();
+                        break;
+                    case "3":
+                        break;
+                    case "0":
+                        continueRaning = false;
+                        Console.WriteLine("Работа программы завершена");
+                        break;
+                    default:
+                        break;
+                }
+            } while (continueRaning);
 
             #region Проверка кол-ва постов статический метод(переменная)
             //Post.ShowCountOfPosts();
@@ -102,5 +97,70 @@ namespace Start
             //Post.ShowCoefficientOfEngagement(Post_4);
             #endregion
         }
+        static void NextAction2PartMenu()
+        {
+            bool continueRaning2Part = true;
+            PostArray posts_2 = new PostArray(4, "");
+            posts_2[0] = Cheking.CreateNewPost();
+            posts_2[1] = Cheking.CreateNewPost(posts_2[0]);
+            posts_2[2] = Cheking.CreateNewPost(posts_2[0]);
+            posts_2[3] = Cheking.CreateNewPost(posts_2[0]);
+            do
+            {
+                ViewUI.ShowMessage("Элементы коллекции");
+                Cheking.ShowCollection(posts_2);
+                int NumberOfPosts = Cheking.CheckIntBigger0("Выбери номер поста представленных выше с которым надо работать от 1 до 4")-1;
+                ViewUI.PrintMenu2Part();
+                string action = Console.ReadLine();
+                
+                try //Ловлю выход за пределы коллекции
+                {
+                    switch (action)//Выбор исполняемой функции
+                    {
+                        case "1":
+                            ViewUI.ShowMessage("Было:");
+                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]++);
+                            ViewUI.ShowMessage("Стало:");
+                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
+                            break;
+                        case "2":
+                            ViewUI.ShowMessage("Было:");
+                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
+                            ViewUI.ShowMessage("Стало:");
+                            Cheking.ShowInfoOfPost(!posts_2[NumberOfPosts]);
+                            break;
+                        case "3":
+                            if ((bool)posts_2[NumberOfPosts])
+                            {
+                                ViewUI.ShowMessage("Да, есть");
+                            }
+                            else
+                            {
+                                ViewUI.ShowMessage("Нет, нету");
+                            }
+                            break;
+                        case "4":
+                            ViewUI.ShowMessage(posts_2[NumberOfPosts]);
+                            break;
+                        case "5":
+                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
+                            break;
+                        case "0":
+
+                            continueRaning2Part = false;
+                            break;
+                        default:
+
+                            break;
+                    }
+                } catch (Exception ex)
+                {
+                    ViewUI.ShowMessage(ex.Message);
+                }
+                
+            } while (continueRaning2Part);
+            
+        }
     }
 }
+

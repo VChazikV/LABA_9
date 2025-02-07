@@ -1,11 +1,21 @@
-﻿using Model;
-namespace PostArrayCollection
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Model
 {
     public class PostArray
     {
         private Post[] postCollection;
         private static int countOfCollections = 0;
         public int Length => postCollection.Length;
+        public PostArray(int size, string text)
+        {
+            postCollection = new Post[size];
+            countOfCollections++;
+        }
         /// <summary>
         /// Конструктор без атрибутов
         /// </summary>
@@ -40,35 +50,47 @@ namespace PostArrayCollection
             }
             countOfCollections++;
         }
-        public static string ShowCollection(Post[] posts)
+        public static string ShowCollection(PostArray posts)
         {
-            string result = "";
-            for (int i = 0; i<posts.Length; i++)
+            if (posts == null)
             {
-                
+                throw new ArgumentNullException("Коллекция не инициализирована");
             }
-            return "";
+            if (posts.Length == 0)
+            {
+                throw new ArgumentException("Длина коллекции равна 0");
+            }
+            string result = "----------------------------------------------------------------------\n";
+            for (int i = 0; i < posts.Length; i++)
+            {
+                result += Post.ShowInfoOfPost(posts[i]);
+            }
+            result += "----------------------------------------------------------------------";
+            return result;
         }
         public Post this[int index]
         {
             get
             {
                 if (index < 0 || index >= postCollection.Length)
-                { 
-                    throw new IndexOutOfRangeException("Индекс за пределами массива"); 
+                {
+                    throw new IndexOutOfRangeException("Индекс за пределами массива");
                 }
                 return postCollection[index];
             }
             set
             {
-                if (index < 0 || index >= postCollection.Length) 
-                { 
-                    throw new IndexOutOfRangeException("Индекс за пределами массива"); 
+                if (index < 0 || index >= postCollection.Length)
+                {
+                    throw new IndexOutOfRangeException("Индекс за пределами массива");
                 }
                 postCollection[index] = value ?? throw new ArgumentNullException(nameof(value), "Нельзя присвоить null");
             }
         }
+        public static string ShowCountOfCollections()
+        {
+            return ($"Кол-во коллекций {countOfCollections}\n");
+        }
     }
-
-
 }
+

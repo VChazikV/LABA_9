@@ -138,96 +138,65 @@
         #endregion
 
 
-        private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)
-        {
-            string corectForm;
-            countOfItem = Math.Abs(countOfItem) % 100;//countOfItem всегда не отрицательна, но для проверки добавим модуль
-            int lastNumber = countOfItem % 10;
-            if (countOfItem > 10 && countOfItem < 20)
-            {
-                corectForm = pluralForm;
-            }
-            else if (lastNumber >= 2 && lastNumber <= 4)
-            {
-                corectForm = singlForm;
-            }
-            else if (lastNumber == 1)
-            {
-                corectForm = normal;
-            }
-            else
-            {
-                corectForm = pluralForm;
-            }
-            return corectForm;
-        }
         /// <summary>
-        /// Вывод информации об объекте в формате "N просмотров. M комментариев. Z реакций."
+        /// Вывод информации об объекте в формате "{ИМЯ} N просмотров. M комментариев. Z реакций."
         /// </summary>
-        public static void ShowInfoOfPostsNumber(Post post)
+        public static string ShowInfoOfPost(Post post)
         {
-            Console.WriteLine(
-                $"------------------------------------\n" +
+            if (post is null)
+            {
+                return "";
+            }
+            return 
+                ($"------------------------------------\n" +
                 $"{post.Name}\n" +
                 $"{post.Views} {GetWordForm(post.Views, "просмотр", "просмотра", "просмотров")}.\n" +
                 $"{post.Comments} {GetWordForm(post.Comments, "комментарий", "комментария", "комментариев")}.\n" +
                 $"{post.Reactions} {GetWordForm(post.Reactions, "реакция", "реакции", "реакций")}.\n" +
                 $"------------------------------------\n");
         }
-        public string ShowInfoOfPostsName()
-        {
-            return Name;
-        }
         /// <summary>
         /// Вывод информации о кол-ве объектов.
         /// </summary>
-        public static void ShowCountOfPosts()
+        public static string ShowCountOfPosts()
         {
-            Console.WriteLine($"Кол-во постов {countOfPosts}\n");
+            return ($"Кол-во постов {countOfPosts}\n");
         }
         /// <summary>
         /// Вывод информации о информации объекта.
         /// </summary>
-        public void ShowCoefficientOfEngagement()
+        public string ShowCoefficientOfEngagement()
         {
-            double countOfEngagement = (float)numViews / SUBSCRIBERS;
+            double countOfEngagement = (float)Views / SUBSCRIBERS;
             countOfEngagement = Math.Round(countOfEngagement, 2);
             if (countOfEngagement > 1)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Коэффициент вовлечённости поста {name} равен {countOfEngagement}\n");
-                Console.ResetColor();
+                return ($"Коэффициент вовлечённости поста {Name} равен {countOfEngagement}\n");
             }
             else if (countOfEngagement < 1)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Коэффициент вовлечённости поста {name} равен {countOfEngagement}\n");
-                Console.ResetColor();
+                return ($"Коэффициент вовлечённости поста {Name} равен {countOfEngagement}\n");
             }
             else
             {
-                Console.WriteLine($"Коэффициент вовлечённости поста {name}  равен {countOfEngagement}\n");
+                return ($"Коэффициент вовлечённости поста {Name}  равен {countOfEngagement}\n");
             }
         }
-        public static void ShowCoefficientOfEngagement(Post postCurrent)
+        public static string ShowCoefficientOfEngagement(Post postCurrent)
         {
             double countOfEngagement = (double)postCurrent.Views / (double)SUBSCRIBERS;
             countOfEngagement = Math.Round(countOfEngagement, 2);
             if (countOfEngagement > 1)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
-                Console.ResetColor();
+                return ($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
             }
             else if (countOfEngagement < 1)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
-                Console.ResetColor();
+                return ($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
             }
             else
             {
-                Console.WriteLine($"Коэффициент вовлечённости поста {postCurrent.Name}  равен {countOfEngagement}\n");
+                return ($"Коэффициент вовлечённости поста {postCurrent.Name}  равен {countOfEngagement}\n");
             }
         }
         #region Операции 2 Часть
@@ -281,5 +250,28 @@
         //    return HashCode.Combine(Views, Comments, Reactions);
         //}
         #endregion
+        private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)
+        {
+            string corectForm;
+            countOfItem = countOfItem % 100;
+            int lastNumber = countOfItem % 10;
+            if (countOfItem > 10 && countOfItem < 20)
+            {
+                corectForm = pluralForm;
+            }
+            else if (lastNumber >= 2 && lastNumber <= 4)
+            {
+                corectForm = singlForm;
+            }
+            else if (lastNumber == 1)
+            {
+                corectForm = normal;
+            }
+            else
+            {
+                corectForm = pluralForm;
+            }
+            return corectForm;
+        }
     }
 }
