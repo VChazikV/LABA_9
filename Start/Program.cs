@@ -1,5 +1,6 @@
 ﻿using View;
 using Controller;
+using PostArrayCollection;
 using Model;
 namespace Start
 {
@@ -7,14 +8,17 @@ namespace Start
     {
         static void Main(string[] args)
         {
-            Post post1 = new Post();
-            Post post2 = new Post();
-            Console.WriteLine(post1==post2);
-            Post post3 = new Post("1221", 12,34,55);
-            Post post4 = new Post(post3);
-            Console.WriteLine(post1 == post2);
-            Console.WriteLine(post3 == post2);
-            Console.WriteLine(post1 == post4);
+            PostArray arr = new PostArray(0);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                Post.ShowInfoOfPostsNumber(arr[i]);
+            }
+            PostArray arr_1 = new PostArray(arr);
+            for (int i = 0; i < arr_1.Length; i++)
+            {
+                Post.ShowInfoOfPostsNumber(arr[i]);
+            }
+            Console.WriteLine(arr_1[2].Equals(arr[2]));
             //ViewUI.PrintMenu();
             //string nextAction = null;
             //bool continueRaning = true;
