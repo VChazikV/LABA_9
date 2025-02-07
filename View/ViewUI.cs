@@ -33,7 +33,9 @@ namespace View
             Console.WriteLine("1 - +1 Просмотр посту");
             Console.WriteLine("2 - +1 Реакция посту");
             Console.WriteLine("3 - Узнать есть ли у поста Комент или Реакция при ненулевых просмотрах");
-            Console.WriteLine("0 - Узнать процент охвата аудитории");
+            Console.WriteLine("4 - Узнать процент охвата аудитории");
+            Console.WriteLine("5 - Вывести на экран выбранный элемент");
+            Console.WriteLine("6 - Узнать процент охвата аудитории");
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Model
 {
@@ -90,6 +91,27 @@ namespace Model
         public static string ShowCountOfCollections()
         {
             return ($"Кол-во коллекций {countOfCollections}\n");
+        }
+        public static string ShowTotalCoefficien(PostArray posts)
+        {
+            double totalEngagement = 0;
+            if (posts is null || posts.Length == 0)
+            {
+                return $"Общий коэффициент вовлечённости 0\n";
+            }
+            for(int i = 0; i < posts.Length; i++)
+            {
+                Post post = posts[i];
+                
+                if (post is not null)
+                {
+                    double countOfEngagement = (double)posts[i].Views / 1000;
+                    countOfEngagement = Math.Round(countOfEngagement, 2);
+                    totalEngagement += countOfEngagement;
+                }
+            }
+            totalEngagement = totalEngagement/posts.Length;
+            return $"Общий коэффициент вовлечённости {totalEngagement}\n"; 
         }
     }
 }
