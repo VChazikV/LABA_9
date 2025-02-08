@@ -21,7 +21,7 @@ namespace Start
                 {
                     case "1":
                         //Если успею, добавить заготовку под второй уровень меню и сделать прогу для взаимодействия
-                        PostArray posts_1 = new PostArray(3, "");
+                        PostArray posts_1 = Cheking.CreateNewCollection(3, "");
                         //Cheking.CreateNewCollection(8);
                         ViewUI.ShowMessage("Введите имя поста:");
                         string name = Console.ReadLine();
@@ -32,15 +32,59 @@ namespace Start
                         posts_1[1] = Cheking.CreateNewPost();//Конструктор без параметров
                         posts_1[2] = Cheking.CreateNewPost(posts_1[0]);//Конструктор с копированием
                         Cheking.ShowCoefficientOfEngagement(posts_1[0]);//Коэффициент через static
-                        Cheking.ShowCoefficientOfEngagement(posts_1[0], "");//Коэффициент ,tp static
+                        Cheking.ShowCoefficientOfEngagement(posts_1[0], "");//Коэффициент без static
                         Cheking.ShowCollection(posts_1);//Вывод
                         Cheking.ShowCountOfPosts();
-                        Cheking.ShowCountOfCollections();
                         break;
                     case "2":
                         NextAction2PartMenu();
                         break;
                     case "3":
+                        PostArray posts_3 = Cheking.CreateNewCollection();//Конструктор без параметров
+                        Cheking.ShowCollection(posts_3);
+                        Cheking.ShowCountOfCollections();
+                        PostArray posts_4 = Cheking.CreateNewCollection(4);//Конструктор с ДСЧ
+                        Cheking.ShowCollection(posts_4);
+                        Cheking.ShowCountOfCollections();
+                        PostArray posts_5 = Cheking.CreateNewCollection(posts_4);//Конструктор копирования
+                        Cheking.ShowCollection(posts_5);
+                        Cheking.ShowCountOfCollections();
+                        PostArray posts_6 = Cheking.CreateNewCollection(2, "");
+                        ViewUI.ShowMessage("Сейчас создадим коллекцию в которой 2 поста.\nВведите данные этих постов:");
+                        for (int i=0; i < posts_6.Length; i++)
+                        {
+                            ViewUI.ShowMessage("Введите имя поста:");
+                            string nam = Console.ReadLine();
+                            int view = Cheking.CheckIntBigger0("Введите количество просмотров:");
+                            int comment = Cheking.CheckIntBigger0("Введите количество комментариев:");
+                            int reaction = Cheking.CheckIntBigger0("Введите количество реакций:");
+                            posts_6[i] = Cheking.CreateNewPost(nam, view, comment, reaction);//Проверка индексатора допустимое значения запись
+                        }
+                        for (int i = 0; i < posts_6.Length; i++)
+                        {
+                            Cheking.ShowInfoOfPost(posts_6[i]);//Проверка индексатора допустимое значения чтение
+                        }
+                        try 
+                        {
+                            posts_6[4] = Cheking.CreateNewPost();
+                        }
+                        catch (Exception ex)
+                        { 
+                            ViewUI.ShowMessage(ex.Message);
+                        }
+                        try
+                        {
+                            Cheking.ShowInfoOfPost(posts_6[4]);
+                        }
+                        catch (Exception ex)
+                        {
+                            ViewUI.ShowMessage(ex.Message);
+                        }
+                        Cheking.ShowTotalCoefficient(posts_4);
+                        break;
+                    case "4":
+                        Cheking.ShowCountOfPosts();
+                        Cheking.ShowCountOfCollections();
                         break;
                     case "0":
                         continueRaning = false;
@@ -170,7 +214,7 @@ namespace Start
                             }
                             break;
                         case "0":
-
+                            Cheking.ClearConsole();
                             continueRaning2Part = false;
                             break;
                         default:
@@ -183,7 +227,6 @@ namespace Start
                 }
                 
             } while (continueRaning2Part);
-            
         }
     }
 }

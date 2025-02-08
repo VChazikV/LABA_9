@@ -234,21 +234,22 @@
             return !(p1 == p2);
         }
 
-        //public override bool Equals(object? obj)
-        //{
-        //    if (obj == null)
-        //        return false;
-        //    if (obj is not Post otherPost)
-        //        return false;
-        //    return Views == otherPost.Views &&
-        //           Comments == otherPost.Comments &&
-        //           Reactions == otherPost.Reactions &&
-        //           Name == otherPost.Name;
-        //}
-        //public override int GetHashCode()
-        //{
-        //    return HashCode.Combine(Views, Comments, Reactions);
-        //}
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (GetType() != obj.GetType())
+                return false;
+            Post other = (Post)obj;
+            return Views == other.Views &&
+                   Comments == other.Comments &&
+                   Reactions == other.Reactions &&
+                   Name == other.Name;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Views, Comments, Reactions);
+        }
         #endregion
         private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)
         {

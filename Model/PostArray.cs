@@ -32,7 +32,7 @@ namespace Model
         {
             if (sizeOfCollection < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(sizeOfCollection), "Кол-во элементов в коллекции не может быть отрицательными");
+                throw new ArgumentOutOfRangeException(nameof(sizeOfCollection),"Кол-во элементов в коллекции не может быть отрицательными");
             }
             postCollection = new Post[sizeOfCollection];
             Random random = new Random();
@@ -55,11 +55,11 @@ namespace Model
         {
             if (posts == null)
             {
-                throw new ArgumentNullException("Коллекция не инициализирована");
+                throw new ArgumentNullException(nameof(posts),"Коллекция не инициализирована");
             }
             if (posts.Length == 0)
             {
-                throw new ArgumentException("Длина коллекции равна 0");
+                throw new ArgumentException(nameof(posts), "Длина коллекции равна 0");
             }
             string result = "----------------------------------------------------------------------\n";
             for (int i = 0; i < posts.Length; i++)
@@ -85,14 +85,14 @@ namespace Model
                 {
                     throw new IndexOutOfRangeException("Индекс за пределами массива");
                 }
-                postCollection[index] = value ?? throw new ArgumentNullException(nameof(value), "Нельзя присвоить null");
+                postCollection[index] = value ?? throw new ArgumentNullException(nameof(index), "Нельзя присвоить null");
             }
         }
         public static string ShowCountOfCollections()
         {
             return ($"Кол-во коллекций {countOfCollections}\n");
         }
-        public static string ShowTotalCoefficien(PostArray posts)
+        public static string ShowTotalCoefficient(PostArray posts)
         {
             double totalEngagement = 0;
             if (posts is null || posts.Length == 0)
@@ -110,7 +110,7 @@ namespace Model
                     totalEngagement += countOfEngagement;
                 }
             }
-            totalEngagement = totalEngagement/posts.Length;
+            totalEngagement = Math.Round(totalEngagement/posts.Length, 2);
             return $"Общий коэффициент вовлечённости {totalEngagement}\n"; 
         }
     }
