@@ -102,7 +102,7 @@ namespace Start
             bool continueRaning2Part = true;
             PostArray posts_2 = new PostArray(4, "");
             posts_2[0] = Cheking.CreateNewPost();
-            posts_2[1] = Cheking.CreateNewPost(posts_2[0]);
+            posts_2[1] = Cheking.CreateNewPost("Видео Топ", 1234, 5432, 0);
             posts_2[2] = Cheking.CreateNewPost(posts_2[0]);
             posts_2[3] = Cheking.CreateNewPost(posts_2[0]);
             do
@@ -140,10 +140,34 @@ namespace Start
                             }
                             break;
                         case "4":
-                            ViewUI.ShowMessage(posts_2[NumberOfPosts]);
+                            double coef = posts_2[NumberOfPosts];
+                            ViewUI.ShowMessage($"Коэффициент вовлечённости поста {posts_2[NumberOfPosts].Name} равен {coef}\n");
                             break;
                         case "5":
-                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
+                            Cheking.ShowCollection(posts_2);
+                            int NumberOfPostsNewRav = Cheking.CheckIntBigger0("Выбери номер нового поста с которым хотите сравнить") - 1;
+                            bool CheckingRav = (posts_2[NumberOfPosts] == posts_2[NumberOfPostsNewRav]);
+                            if (CheckingRav)
+                            {
+                                ViewUI.ShowMessage($"Пост '{posts_2[NumberOfPosts].Name}' равен посту '{posts_2[NumberOfPostsNewRav].Name}'");
+                            }
+                            else
+                            {
+                                ViewUI.ShowMessage($"Пост '{posts_2[NumberOfPosts].Name}' НЕ равен посту '{posts_2[NumberOfPostsNewRav].Name}'");
+                            }
+                            break;
+                        case "6":
+                            Cheking.ShowCollection(posts_2);
+                            int NumberOfPostsNewNeRav = Cheking.CheckIntBigger0("Выбери номер нового поста с которым хотите сравнить") - 1;
+                            bool CheckingNeRav = (posts_2[NumberOfPosts] != posts_2[NumberOfPostsNewNeRav]);
+                            if (CheckingNeRav)
+                            {
+                                ViewUI.ShowMessage($"Пост '{posts_2[NumberOfPosts].Name}' НЕ равен посту '{posts_2[NumberOfPostsNewNeRav].Name}'");
+                            }
+                            else
+                            {
+                                ViewUI.ShowMessage($"Пост '{posts_2[NumberOfPosts].Name}' равен посту '{posts_2[NumberOfPostsNewNeRav].Name}'");
+                            }
                             break;
                         case "0":
 
