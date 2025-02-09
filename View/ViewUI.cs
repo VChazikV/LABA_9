@@ -23,6 +23,10 @@ namespace View
         {
             Console.WriteLine(message);
         }
+        public static void ShowMessage(bool message)
+        {
+            Console.WriteLine(message);
+        }
         public static void ShowMessage(double message)
         {
             Console.WriteLine(message);

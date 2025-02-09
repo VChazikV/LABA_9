@@ -85,9 +85,14 @@ namespace Start
                         Cheking.ShowCountOfPosts();
                         Cheking.ShowCountOfCollections();
                         break;
+                    case "5":
+                        PostArray posts = new PostArray(4);
+                        PostArray postsCopied = new PostArray(posts);
+                        ViewUI.ShowMessage((Object.ReferenceEquals(posts, postsCopied)));//Проверка равенства ссылок
+                        break;
                     case "0":
                         continueRaning = false;
-                        Console.WriteLine("Работа программы завершена");
+                        ViewUI.ShowMessage("Работа программы завершена");
                         break;
                     default:
                         break;
