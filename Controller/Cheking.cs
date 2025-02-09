@@ -25,6 +25,7 @@ namespace Controller
         public static Post CreateNewPost(Post post)
         {
             return new Post(post);
+
         }
         #endregion
         #region Создание Коллекции
@@ -78,6 +79,18 @@ namespace Controller
             }
         }
         #endregion
+        public static Post TryIncreaseRections(Post post)
+        {
+            try
+            {
+                return !post;
+            }
+            catch (OverflowException ex) 
+            {
+                ViewUI.ShowEror(ex.Message);
+                return null;
+            }
+        }
         public static void ShowInfoOfPost(Post post)
         {
             try

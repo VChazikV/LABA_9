@@ -1,8 +1,7 @@
 ﻿using View;
 using Controller;
 using Model;
-using Microsoft.VisualBasic;
-using System;
+
 namespace Start
 {
     internal class Program
@@ -171,7 +170,9 @@ namespace Start
                             ViewUI.ShowMessage("Было:");
                             Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
                             ViewUI.ShowMessage("Стало:");
-                            Cheking.ShowInfoOfPost(!posts_2[NumberOfPosts]);
+                            Post helpPost = Cheking.TryIncreaseRections(posts_2[NumberOfPosts]);
+                            posts_2[NumberOfPosts] = helpPost;
+                            Cheking.ShowInfoOfPost(posts_2[NumberOfPosts]);
                             break;
                         case "3":
                             if ((bool)posts_2[NumberOfPosts])

@@ -196,7 +196,7 @@
             }
             else
             {
-                return ($"Коэффициент вовлечённости поста {postCurrent.Name}  равен {countOfEngagement}\n");
+                return ($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
             }
         }
         #region Операции 2 Часть
@@ -208,13 +208,13 @@
         }
         public static Post operator !(Post currentPost)
         {
-            //Post resultPost = new Post(currentPost);
-            //resultPost.Reactions = resultPost.Reactions + 1; //Этот вариант не работает из-за обработки оператора ! не как ++ и --
-            //return resultPost;
+            Post resultPost = new Post(currentPost);
+            resultPost.Reactions = resultPost.Reactions + 1; //Этот вариант не работает из-за обработки оператора ! не как ++ и --
+            return resultPost;
 
             //Нарушим правила обработки унарных операций и будем изменять сам операнд
-            currentPost.Reactions +=1;
-            return currentPost;
+            //currentPost.Reactions +=1;
+            //return currentPost;
 
         }
         public static explicit operator bool(Post currentPost)
@@ -227,7 +227,7 @@
         }
         public static bool operator ==(Post p1, Post p2)
         {
-            return p1.Views == p2.Views && p1.Comments == p2.Comments && p1.Reactions == p2.Reactions;
+            return p1.Name == p2.Name && p1.Views == p2.Views && p1.Comments == p2.Comments && p1.Reactions == p2.Reactions;
         }
         public static bool operator !=(Post p1, Post p2)
         {
@@ -274,5 +274,6 @@
             }
             return corectForm;
         }
+        
     }
 }
