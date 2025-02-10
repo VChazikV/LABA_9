@@ -3,12 +3,16 @@ namespace View
 {
     public class ViewUI
     {
+        #region Вывод ошибки
         public static void ShowEror(string message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"Ошибка: {message}");
             Console.ForegroundColor = ConsoleColor.White;
         }
+        #endregion
+
+        #region Вывод сообщений
         public static void ShowMessage(string message, string color)
         {
             if (color == "Red") 
@@ -19,6 +23,7 @@ namespace View
             }
 
         }
+
         public static void ShowMessage(string message)
         {
             Console.WriteLine(message);
@@ -27,10 +32,21 @@ namespace View
         {
             Console.WriteLine(message);
         }
+
         public static void ShowMessage(double message)
         {
             Console.WriteLine(message);
         }
+        #endregion
+
+        #region Оптимизация вывода
+        public static void ClearConsole()
+        {
+            Console.Clear();
+        }
+        #endregion
+
+        #region Вывод меню
         public static void PrintMenu()
         {
             Console.WriteLine("-------Параметры меню-------");
@@ -62,6 +78,7 @@ namespace View
             Console.WriteLine("5 - Сравнить выбранный элемент с новым элементом на равенство");
             Console.WriteLine("6 - Узнать процент охвата аудитории");
         }
+        #endregion
 
     }
 }

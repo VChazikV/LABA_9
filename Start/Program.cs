@@ -220,7 +220,7 @@ namespace Start
                             }
                             break;
                         case "0":
-                            Cheking.ClearConsole();
+                            ViewUI.ClearConsole();
                             continueRaning2Part = false;
                             break;
                         default:

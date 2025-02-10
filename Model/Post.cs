@@ -137,7 +137,7 @@
         }
         #endregion
 
-
+        #region Операции 1 части
         /// <summary>
         /// Вывод информации об объекте в формате "{ИМЯ} N просмотров. M комментариев. Z реакций."
         /// </summary>
@@ -199,6 +199,8 @@
                 return ($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
             }
         }
+        #endregion
+
         #region Операции 2 Часть
         public static Post operator ++(Post currentPost)
         {
@@ -251,29 +253,32 @@
             return HashCode.Combine(Views, Comments, Reactions);
         }
         #endregion
-        private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)
+
+        #region Вспомогательные функции
+        private static string GetWordForm(int countOfItem, string normal, string singlForm, string pluralForm)//Вспомогательный метод, для нахождения формы слова
         {
-            string corectForm;
+            string corкectForm;
             countOfItem = countOfItem % 100;
             int lastNumber = countOfItem % 10;
             if (countOfItem > 10 && countOfItem < 20)
             {
-                corectForm = pluralForm;
+                corкectForm = pluralForm;
             }
             else if (lastNumber >= 2 && lastNumber <= 4)
             {
-                corectForm = singlForm;
+                corкectForm = singlForm;
             }
             else if (lastNumber == 1)
             {
-                corectForm = normal;
+                corкectForm = normal;
             }
             else
             {
-                corectForm = pluralForm;
+                corкectForm = pluralForm;
             }
-            return corectForm;
+            return corкectForm;
         }
-        
+        #endregion
+
     }
 }

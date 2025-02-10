@@ -2,9 +2,20 @@
 {
     public class PostArray
     {
+        #region Атрибуты
         private Post[] postCollection;
+
         private static int countOfCollections = 0;
-        public int Length => postCollection.Length;
+        #endregion
+
+        #region Свойства
+        public int Length => postCollection.Length;//Свойство длины
+        #endregion
+
+        #region Конструкторы
+        /// <summary>
+        /// Конструктор создания пустой коллекции заданной длины
+        /// </summary>
         public PostArray(int size, string text)
         {
             postCollection = new Post[size];
@@ -44,6 +55,9 @@
             }
             countOfCollections++;
         }
+        #endregion
+
+        #region Методы Вывода информации
         public static string ShowCollection(PostArray posts)
         {
             if (posts == null)
@@ -62,7 +76,37 @@
             result += "----------------------------------------------------------------------";
             return result;
         }
-        public Post this[int index]
+
+        public static string ShowCountOfCollections()
+        {
+            return ($"Кол-во коллекций {countOfCollections}\n");
+        }
+
+        public static string ShowTotalCoefficient(PostArray posts)
+        {
+            double totalEngagement = 0;
+            if (posts is null || posts.Length == 0)
+            {
+                return $"Общий коэффициент вовлечённости 0\n";
+            }
+            for (int i = 0; i < posts.Length; i++)
+            {
+                Post post = posts[i];
+
+                if (post is not null)
+                {
+                    double countOfEngagement = (double)posts[i].Views / 1000;
+                    countOfEngagement = Math.Round(countOfEngagement, 2);
+                    totalEngagement += countOfEngagement;
+                }
+            }
+            totalEngagement = Math.Round(totalEngagement / posts.Length, 2);
+            return $"Общий коэффициент вовлечённости {totalEngagement}\n";
+        }
+        #endregion
+
+        #region Индексатор
+        public Post this[int index] // Индексатор
         {
             get
             {
@@ -81,31 +125,7 @@
                 postCollection[index] = value ?? throw new ArgumentNullException(nameof(index), "Нельзя присвоить null");
             }
         }
-        public static string ShowCountOfCollections()
-        {
-            return ($"Кол-во коллекций {countOfCollections}\n");
-        }
-        public static string ShowTotalCoefficient(PostArray posts)
-        {
-            double totalEngagement = 0;
-            if (posts is null || posts.Length == 0)
-            {
-                return $"Общий коэффициент вовлечённости 0\n";
-            }
-            for(int i = 0; i < posts.Length; i++)
-            {
-                Post post = posts[i];
-                
-                if (post is not null)
-                {
-                    double countOfEngagement = (double)posts[i].Views / 1000;
-                    countOfEngagement = Math.Round(countOfEngagement, 2);
-                    totalEngagement += countOfEngagement;
-                }
-            }
-            totalEngagement = Math.Round(totalEngagement/posts.Length, 2);
-            return $"Общий коэффициент вовлечённости {totalEngagement}\n"; 
-        }
+        #endregion
     }
 }
 

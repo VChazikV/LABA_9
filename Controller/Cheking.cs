@@ -28,6 +28,7 @@ namespace Controller
 
         }
         #endregion
+
         #region Создание Коллекции
         public static PostArray CreateNewCollection()
         {
@@ -79,18 +80,8 @@ namespace Controller
             }
         }
         #endregion
-        public static Post TryIncreaseRections(Post post)
-        {
-            try
-            {
-                return !post;
-            }
-            catch (OverflowException ex) 
-            {
-                ViewUI.ShowEror(ex.Message);
-                return null;
-            }
-        }
+
+        #region Вывод данных о посте
         public static void ShowInfoOfPost(Post post)
         {
             try
@@ -103,31 +94,7 @@ namespace Controller
                 ViewUI.ShowEror(ex.Message);
             }
         }
-        public static void ShowCoefficientOfEngagement(Post post)
-        {
-            try
-            {
-                string result = Post.ShowCoefficientOfEngagement(post);
-                ViewUI.ShowMessage(result);
-            }
-            catch (Exception ex)
-            {
-                ViewUI.ShowEror(ex.Message);
-            }
-        }
-        public static void ShowTotalCoefficient(PostArray posts)
-        {
-            try
-            {
-                string result = PostArray.ShowTotalCoefficient(posts);
-                ViewUI.ShowMessage(result);
-            }
-            catch (Exception ex)
-            {
-                ViewUI.ShowEror(ex.Message);
-            }
-        }
-        
+
         public static void ShowCoefficientOfEngagement(Post post, string text)
         {
             try
@@ -140,11 +107,12 @@ namespace Controller
                 ViewUI.ShowEror(ex.Message);
             }
         }
-        public static void ShowCountOfCollections()
+
+        public static void ShowCoefficientOfEngagement(Post post)
         {
             try
             {
-                string result = PostArray.ShowCountOfCollections();
+                string result = Post.ShowCoefficientOfEngagement(post);
                 ViewUI.ShowMessage(result);
             }
             catch (Exception ex)
@@ -165,7 +133,9 @@ namespace Controller
                 ViewUI.ShowEror(ex.Message);
             }
         }
+        #endregion
 
+        #region Вывод данных о коллекции
         public static void ShowCollection(PostArray posts)
         {
             try
@@ -173,28 +143,58 @@ namespace Controller
                 string result = PostArray.ShowCollection(posts);
                 ViewUI.ShowMessage(result);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ViewUI.ShowEror(ex.Message);
             }
-
         }
-        public static Post Increments(Post post)
+
+        public static void ShowTotalCoefficient(PostArray posts)
         {
             try
             {
-                return(++post);
+                string result = PostArray.ShowTotalCoefficient(posts);
+                ViewUI.ShowMessage(result);
             }
             catch (Exception ex)
+            {
+                ViewUI.ShowEror(ex.Message);
+            }
+        }
+        
+        public static void ShowCountOfCollections()
+        {
+            try
+            {
+                string result = PostArray.ShowCountOfCollections();
+                ViewUI.ShowMessage(result);
+            }
+            catch (Exception ex)
+            {
+                ViewUI.ShowEror(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Проверка логики
+        public static Post TryIncreaseRections(Post post)
+        {
+            try
+            {
+                return !post;
+            }
+            catch (OverflowException ex)
             {
                 ViewUI.ShowEror(ex.Message);
                 return null;
             }
         }
-        public static void ClearConsole()
-        {
-            Console.Clear();
-        }
+        #endregion
+
+        #region Вспомогательные функции
+        /// <summary>
+        /// Метод преобразования формы слова
+        /// </summary>
         public static int CheckIntBigger0(string text)//функция Проверки числа на целое и больше 0
         {
             int intNumber;//Входные данные(число больше 0)
@@ -232,9 +232,7 @@ namespace Controller
                 }
             } while (intNumber < 1);//Цикл работает пока не получит целое число больше 0
             return intNumber;//Возвращаем значение
-        }//Блок-схема Есть+
-        /// <summary>
-        /// Метод преобразования формы слова
-        /// </summary>
+        }
+        #endregion
     }
 }
