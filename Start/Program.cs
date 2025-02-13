@@ -150,7 +150,7 @@ namespace Start
             bool continueRaning2Part = true;
             PostArray posts_2 = new PostArray(4, "");
             posts_2[0] = Cheking.CreateNewPost();
-            posts_2[1] = Cheking.CreateNewPost("Видео Топ", 1234, 5432, 0);
+            posts_2[1] = Cheking.CreateNewPost("Топ видео", 1234, 5432, 0);
             posts_2[2] = Cheking.CreateNewPost(posts_2[0]);
             posts_2[3] = Cheking.CreateNewPost(posts_2[0]);
             do
