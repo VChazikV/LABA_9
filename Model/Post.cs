@@ -199,6 +199,12 @@
                 return ($"Коэффициент вовлечённости поста {postCurrent.Name} равен {countOfEngagement}\n");
             }
         }
+        public static double ShowCoefficientOfEngagement3Part(Post postCurrent)
+        {
+            double countOfEngagement = (double)postCurrent.Views / (double)SUBSCRIBERS;
+            countOfEngagement = Math.Round(countOfEngagement, 2);
+            return countOfEngagement;
+        }
         #endregion
 
         #region Операции 2 Часть

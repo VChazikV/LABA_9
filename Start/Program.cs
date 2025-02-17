@@ -6,7 +6,15 @@ namespace Start
 {
     internal class Program
     {
-
+        static double ShowTotalCoefficient(PostArray postArray)//Функция в нахождения среднего коэффициента
+        {
+            double totalCoefficent = 0;
+            for (int i = 0; i<postArray.Length; i++)
+            {
+                totalCoefficent += Post.ShowCoefficientOfEngagement3Part(postArray[i]);
+            }
+            return Math.Round(totalCoefficent/ postArray.Length, 2);
+        }
         static void Main(string[] args)
         {
             
@@ -49,6 +57,8 @@ namespace Start
                         Cheking.ShowCollection(posts_5);
                         Cheking.ShowCountOfCollections();
                         PostArray posts_6 = Cheking.CreateNewCollection(2, "");
+                        Console.WriteLine($"Общий коэффициент вовлечённости {ShowTotalCoefficient(posts_4)}"); //Функция в Program
+                        Cheking.ShowTotalCoefficient(posts_4);//Функция в PostArray
                         ViewUI.ShowMessage("Сейчас создадим коллекцию в которой 2 поста.\nВведите данные этих постов:");
                         for (int i=0; i < posts_6.Length; i++)
                         {
@@ -79,7 +89,6 @@ namespace Start
                         {
                             ViewUI.ShowMessage(ex.Message);
                         }
-                        Cheking.ShowTotalCoefficient(posts_4);
                         break;
                     case "4":
                         Cheking.ShowCountOfPosts();
